@@ -1,10 +1,12 @@
-package club.wello.mtracker;
+package club.wello.mtracker.fagment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import club.wello.mtracker.R;
 
 /**
  * A placeholder fragment containing a simple view.

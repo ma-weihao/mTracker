@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerticalLineDotView">
+        <attr name="lineColor" format="color" />
+        <attr name="dotColor" format="color" />
+        <attr name="displayUpLine" format="boolean" />
+        <attr name="displayDownLine" format="boolean" />
+        <attr name="special" format="boolean" />
+        <attr name="specialDotColor" format="color" />
+    </declare-styleable>
+</resources>
