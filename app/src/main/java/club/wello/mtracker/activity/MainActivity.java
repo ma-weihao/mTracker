@@ -10,12 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
 import java.util.Map;
 
 import club.wello.mtracker.R;
-import club.wello.mtracker.Util.HttpUtil;
+import club.wello.mtracker.apiUtil.DaoMaster;
+import club.wello.mtracker.apiUtil.DaoSession;
 import club.wello.mtracker.apiUtil.KdniaoUtil;
 import club.wello.mtracker.apiUtil.TrackCompanyInfo;
+import club.wello.mtracker.apiUtil.TrackInfo;
+import club.wello.mtracker.apiUtil.TrackInfoDao;
+import club.wello.mtracker.util.HttpUtil;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -23,6 +28,8 @@ import io.reactivex.disposables.Disposable;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private TrackInfoDao trackInfoDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        doSomeThing();
+//        doSomeThing();
+        doAnotherThing();
+    }
+
+    private void doAnotherThing() {
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(this, "trace.db", null);
+        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        trackInfoDao = daoSession.getTrackInfoDao();
+        List<TrackInfo> trackInfoList = trackInfoDao.loadAll();
+        Log.d(TAG, "doAnotherThing: " + trackInfoList.size());
     }
 
     private void doSomeThing() {

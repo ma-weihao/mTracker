@@ -1,5 +1,11 @@
 package club.wello.mtracker.apiUtil;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Transient;
+
 import java.util.List;
 
 /**
@@ -7,9 +13,8 @@ import java.util.List;
  * document: http://www.kdniao.com/v2/API/Track.aspx
  * Created by maweihao on 2017/10/9.
  */
-
+@Entity
 public class TrackInfo {
-
 
     /**
      * LogisticCode : 3908741386124
@@ -20,11 +25,39 @@ public class TrackInfo {
      * Success : true
      */
 
+    @Property
+    private String jsonString;
+    @Property
+    private Long createdTime;
+    @Property
+    private String title;
+
+    @Id
     private String LogisticCode;
+    @Transient
     private String ShipperCode;
+    @Transient
     private String State;
+    @Transient
     private String EBusinessID;
-    private String Reason;
+    @Transient
+    private String Reason;  //only exists when Success is false
+    @Transient
+    private boolean Success;
+    @Transient
+    private List<TracesBean> Traces;
+
+    @Generated(hash = 1639036914)
+    public TrackInfo(String jsonString, Long createdTime, String title, String LogisticCode) {
+        this.jsonString = jsonString;
+        this.createdTime = createdTime;
+        this.title = title;
+        this.LogisticCode = LogisticCode;
+    }
+
+    @Generated(hash = 1325890427)
+    public TrackInfo() {
+    }
 
     public String getReason() {
         return Reason;
@@ -33,9 +66,6 @@ public class TrackInfo {
     public void setReason(String reason) {
         Reason = reason;
     }
-
-    private boolean Success;
-    private List<TracesBean> Traces;
 
     public String getLogisticCode() {
         return LogisticCode;
@@ -83,6 +113,30 @@ public class TrackInfo {
 
     public void setTraces(List<TracesBean> Traces) {
         this.Traces = Traces;
+    }
+
+    public String getJsonString() {
+        return this.jsonString;
+    }
+
+    public void setJsonString(String jsonString) {
+        this.jsonString = jsonString;
+    }
+
+    public Long getCreatedTime() {
+        return this.createdTime;
+    }
+
+    public void setCreatedTime(Long createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public static class TracesBean {

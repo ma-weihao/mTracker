@@ -1,4 +1,4 @@
-package club.wello.mtracker.Util;
+package club.wello.mtracker.util;
 
 import java.util.Map;
 

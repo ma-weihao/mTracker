@@ -22,8 +22,7 @@ public class TrackCompanyInfo {
     private String LogisticCode;
     private int Code;
     private List<ShippersBean> Shippers;
-
-    private String Reason;
+    private String Reason;  //only exists when Success is false
 
     public String getReason() {
         return Reason;
