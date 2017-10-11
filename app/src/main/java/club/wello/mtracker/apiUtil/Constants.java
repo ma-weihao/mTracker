@@ -16,4 +16,8 @@ public class Constants {
 
     public static final int SCANNING_REQUEST_CODE = 101;
 
+    public static final String package_number = "PACKAGE_NUMBER";
+    public static final String package_title = "PACKAGE_TITLE";
+    public static final String trace_info = "TRACE_INFO";
+
 }

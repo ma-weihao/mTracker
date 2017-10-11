@@ -95,4 +95,9 @@
     <string name="unable_to_open_camera">Unable to open camera</string>
     <string name="error">error</string>
     <string name="activity_scan_code">Scan Code</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="package_number">Package Number</string>
+    <string name="title_optional">Title (optional)</string>
 </resources>

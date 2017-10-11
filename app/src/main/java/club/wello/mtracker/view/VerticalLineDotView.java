@@ -46,7 +46,7 @@ public class VerticalLineDotView extends View {
         linePaint = new Paint();
         linePaint.setColor(lineColor);
         linePaint.setStyle(Paint.Style.FILL);
-        linePaint.setStrokeWidth(20);
+        linePaint.setStrokeWidth(15);
 
         dotPaint = new Paint();
         dotPaint.setColor(dotColor);
@@ -69,9 +69,9 @@ public class VerticalLineDotView extends View {
             canvas.drawLine(width / 2, height / 2, width / 2, height, linePaint);
         }
         if (isSpecialDot) {
-            canvas.drawCircle(width / 2, height / 2, 20, specialDotPaint);
+            canvas.drawCircle(width / 2, height / 2, 30, specialDotPaint);
         } else {
-            canvas.drawCircle(width / 2, height / 2, 10, dotPaint);
+            canvas.drawCircle(width / 2, height / 2, 20, dotPaint);
         }
         super.onDraw(canvas);
     }

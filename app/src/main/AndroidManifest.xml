@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddActivity" />
+        <activity android:name=".activity.AddActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.PackageDetailActivity"
             android:label="@string/title_activity_package_detail"
