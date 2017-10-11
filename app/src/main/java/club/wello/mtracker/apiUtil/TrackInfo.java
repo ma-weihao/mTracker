@@ -36,7 +36,7 @@ public class TrackInfo {
     private String LogisticCode;
     @Transient
     private String ShipperCode;
-    @Id
+    @Property
     private String State;
     @Transient
     private String EBusinessID;
@@ -47,12 +47,13 @@ public class TrackInfo {
     @Transient
     private List<TracesBean> Traces;
 
-    @Generated(hash = 1639036914)
-    public TrackInfo(String jsonString, Long createdTime, String title, String LogisticCode) {
+    @Generated(hash = 215756737)
+    public TrackInfo(String jsonString, Long createdTime, String title, String LogisticCode, String State) {
         this.jsonString = jsonString;
         this.createdTime = createdTime;
         this.title = title;
         this.LogisticCode = LogisticCode;
+        this.State = State;
     }
 
     @Generated(hash = 1325890427)

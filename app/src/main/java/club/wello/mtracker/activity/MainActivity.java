@@ -2,6 +2,8 @@ package club.wello.mtracker.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +27,8 @@ import club.wello.mtracker.util.HttpUtil;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+
+import static club.wello.mtracker.apiUtil.Constants.SCANNING_REQUEST_CODE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,11 +49,35 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivityForResult(intent, SCANNING_REQUEST_CODE);
             }
         });
 
 //        doSomeThing();
         doAnotherThing();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SCANNING_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    final Bundle bundle = data.getExtras();
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, bundle.getString("result"), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     private void doAnotherThing() {

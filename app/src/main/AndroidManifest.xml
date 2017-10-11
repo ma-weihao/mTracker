@@ -29,6 +29,16 @@
             android:name=".activity.PackageDetailActivity"
             android:label="@string/title_activity_package_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".zxing.CaptureActivity"
+            android:label="@string/activity_scan_code"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="io.github.marktony.espresso.zxing.CaptureActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

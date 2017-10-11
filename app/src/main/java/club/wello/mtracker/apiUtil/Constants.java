@@ -14,4 +14,6 @@ public class Constants {
     //请求url
     private String ReqURL="http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx";
 
+    public static final int SCANNING_REQUEST_CODE = 101;
+
 }
