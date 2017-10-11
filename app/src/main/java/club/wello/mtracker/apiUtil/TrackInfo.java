@@ -36,7 +36,7 @@ public class TrackInfo {
     private String LogisticCode;
     @Transient
     private String ShipperCode;
-    @Transient
+    @Id
     private String State;
     @Transient
     private String EBusinessID;

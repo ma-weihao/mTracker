@@ -3,6 +3,9 @@
     package="club.wello.mtracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,7 @@
         </activity>
         <activity android:name=".activity.AddActivity" />
         <activity
-            android:name=".PackageDetailActivity"
+            android:name=".activity.PackageDetailActivity"
             android:label="@string/title_activity_package_detail"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

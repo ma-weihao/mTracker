@@ -21,7 +21,7 @@ android {
     apply plugin: 'com.android.application'
     apply plugin: 'org.greenrobot.greendao'
     greendao{
-        schemaVersion 1
+        schemaVersion 2
         targetGenDir 'src/main/java'
     }
 
@@ -34,6 +34,7 @@ ext {
     butterknifeVersion = '8.8.0'
     glideVersion = '3.8.0'
     greenDAOVersion = '3.2.2'
+    zxingVersion = '3.3.0'
 }
 
 dependencies {
@@ -55,6 +56,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.2'
 
     compile "org.greenrobot:greendao:${greenDAOVersion}"
+    compile "com.google.zxing:core:${zxingVersion}"
 
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
