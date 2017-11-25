@@ -12,12 +12,28 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <style name="info_text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey_500</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="detail_subtitle_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorAccentLight</item>
+    </style>
+
+    <style name="detail_subcontent_text_content">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
 
 </resources>

@@ -66,4 +66,9 @@ public class TraceListAdapter extends RecyclerView.Adapter<TraceListAdapter.View
             time = itemView.findViewById(R.id.tv_time);
         }
     }
+
+    public void updateData(List<TrackInfo.TracesBean> list) {
+        this.tracesBeanList = list;
+        notifyDataSetChanged();
+    }
 }

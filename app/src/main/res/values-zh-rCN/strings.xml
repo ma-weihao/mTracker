@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">我的包裹</string>
+    <string name="ship_state">物流状态</string>
+    <string name="tv_number">运单号</string>
+    <string name="mark_unread">标为未读</string>
+    <string name="rename">重命名</string>
+    <string name="delete">删除</string>
+    <string name="package_number_copied">运单号已复制至剪切板</string>
+    <string name="edit_name">编辑名称</string>
+    <string name="input_empty">名称不能为空</string>
+    <string name="state_0">无轨迹</string>
+    <string name="state_1">已揽收</string>
+    <string name="state_2">在途中</string>
+    <string name="state_3">已签收</string>
+    <string name="state_4">问题件</string>
+    <string name="number_exist_error">已存在</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="wrong_number_and_check">号码错误</string>
+    <string name="number_format_wrong">输入无效！</string>
+    <string name="require_permission">需要相机权限以扫描</string>
+    <string name="permission_denied">需要权限</string>
+    <string name="activity_add_package">添加</string>
+    <string name="undo">撤销</string>
+    <string name="package_removed_msg">已被删除</string>
+    <string name="go_to_settings">打开系统设置</string>
+    <string name="network_error">当前不能连接网络</string>
+    <string name="search">搜索</string>
+    <string name="no_item">等待添加第一个包裹</string>
+    <string name="title_optional">名称（可选）</string>
+    <string name="package_number">包裹名称</string>
+    <string name="activity_scan_code">扫描</string>
+    <string name="error">错误</string>
+    <string name="unable_to_open_camera">打开相机失败</string>
+    <string name="scan_code">扫描</string>
+    <string name="action_settings">设置</string>
+</resources>

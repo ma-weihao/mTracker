@@ -22,11 +22,13 @@ public class TrackInfoDao extends AbstractDao<TrackInfo, String> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property JsonString = new Property(0, String.class, "jsonString", false, "JSON_STRING");
-        public final static Property CreatedTime = new Property(1, Long.class, "createdTime", false, "CREATED_TIME");
-        public final static Property Title = new Property(2, String.class, "title", false, "TITLE");
-        public final static Property LogisticCode = new Property(3, String.class, "LogisticCode", true, "LOGISTIC_CODE");
-        public final static Property State = new Property(4, String.class, "State", false, "STATE");
+        public final static Property LogisticCode = new Property(0, String.class, "LogisticCode", true, "LOGISTIC_CODE");
+        public final static Property JsonString = new Property(1, String.class, "jsonString", false, "JSON_STRING");
+        public final static Property CreatedTime = new Property(2, Long.class, "createdTime", false, "CREATED_TIME");
+        public final static Property Title = new Property(3, String.class, "title", false, "TITLE");
+        public final static Property Readable = new Property(4, boolean.class, "readable", false, "READABLE");
+        public final static Property Pushable = new Property(5, boolean.class, "pushable", false, "PUSHABLE");
+        public final static Property State = new Property(6, String.class, "State", false, "STATE");
     }
 
 
@@ -42,11 +44,13 @@ public class TrackInfoDao extends AbstractDao<TrackInfo, String> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TRACK_INFO\" (" + //
-                "\"JSON_STRING\" TEXT," + // 0: jsonString
-                "\"CREATED_TIME\" INTEGER," + // 1: createdTime
-                "\"TITLE\" TEXT," + // 2: title
-                "\"LOGISTIC_CODE\" TEXT PRIMARY KEY NOT NULL ," + // 3: LogisticCode
-                "\"STATE\" TEXT);"); // 4: State
+                "\"LOGISTIC_CODE\" TEXT PRIMARY KEY NOT NULL ," + // 0: LogisticCode
+                "\"JSON_STRING\" TEXT," + // 1: jsonString
+                "\"CREATED_TIME\" INTEGER," + // 2: createdTime
+                "\"TITLE\" TEXT," + // 3: title
+                "\"READABLE\" INTEGER NOT NULL ," + // 4: readable
+                "\"PUSHABLE\" INTEGER NOT NULL ," + // 5: pushable
+                "\"STATE\" TEXT);"); // 6: State
     }
 
     /** Drops the underlying database table. */
@@ -59,29 +63,31 @@ public class TrackInfoDao extends AbstractDao<TrackInfo, String> {
     protected final void bindValues(DatabaseStatement stmt, TrackInfo entity) {
         stmt.clearBindings();
  
+        String LogisticCode = entity.getLogisticCode();
+        if (LogisticCode != null) {
+            stmt.bindString(1, LogisticCode);
+        }
+ 
         String jsonString = entity.getJsonString();
         if (jsonString != null) {
-            stmt.bindString(1, jsonString);
+            stmt.bindString(2, jsonString);
         }
  
         Long createdTime = entity.getCreatedTime();
         if (createdTime != null) {
-            stmt.bindLong(2, createdTime);
+            stmt.bindLong(3, createdTime);
         }
  
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(3, title);
+            stmt.bindString(4, title);
         }
- 
-        String LogisticCode = entity.getLogisticCode();
-        if (LogisticCode != null) {
-            stmt.bindString(4, LogisticCode);
-        }
+        stmt.bindLong(5, entity.getReadable() ? 1L: 0L);
+        stmt.bindLong(6, entity.getPushable() ? 1L: 0L);
  
         String State = entity.getState();
         if (State != null) {
-            stmt.bindString(5, State);
+            stmt.bindString(7, State);
         }
     }
 
@@ -89,56 +95,62 @@ public class TrackInfoDao extends AbstractDao<TrackInfo, String> {
     protected final void bindValues(SQLiteStatement stmt, TrackInfo entity) {
         stmt.clearBindings();
  
+        String LogisticCode = entity.getLogisticCode();
+        if (LogisticCode != null) {
+            stmt.bindString(1, LogisticCode);
+        }
+ 
         String jsonString = entity.getJsonString();
         if (jsonString != null) {
-            stmt.bindString(1, jsonString);
+            stmt.bindString(2, jsonString);
         }
  
         Long createdTime = entity.getCreatedTime();
         if (createdTime != null) {
-            stmt.bindLong(2, createdTime);
+            stmt.bindLong(3, createdTime);
         }
  
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(3, title);
+            stmt.bindString(4, title);
         }
- 
-        String LogisticCode = entity.getLogisticCode();
-        if (LogisticCode != null) {
-            stmt.bindString(4, LogisticCode);
-        }
+        stmt.bindLong(5, entity.getReadable() ? 1L: 0L);
+        stmt.bindLong(6, entity.getPushable() ? 1L: 0L);
  
         String State = entity.getState();
         if (State != null) {
-            stmt.bindString(5, State);
+            stmt.bindString(7, State);
         }
     }
 
     @Override
     public String readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3);
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
     public TrackInfo readEntity(Cursor cursor, int offset) {
         TrackInfo entity = new TrackInfo( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // jsonString
-            cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // createdTime
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // LogisticCode
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // State
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // LogisticCode
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // jsonString
+            cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2), // createdTime
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // title
+            cursor.getShort(offset + 4) != 0, // readable
+            cursor.getShort(offset + 5) != 0, // pushable
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // State
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, TrackInfo entity, int offset) {
-        entity.setJsonString(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setCreatedTime(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setLogisticCode(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setState(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setLogisticCode(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setJsonString(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setCreatedTime(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
+        entity.setTitle(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setReadable(cursor.getShort(offset + 4) != 0);
+        entity.setPushable(cursor.getShort(offset + 5) != 0);
+        entity.setState(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

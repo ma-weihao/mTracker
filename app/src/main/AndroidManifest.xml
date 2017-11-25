@@ -13,9 +13,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".mvp.packageList.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -24,10 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AddActivity"
+        <activity
+            android:name=".mvp.addPackage.AddActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.PackageDetailActivity"
+            android:name=".mvp.packageDetail.PackageDetailActivity"
             android:label="@string/title_activity_package_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -40,6 +41,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".mvp.search.SearchActivity" />
+
+        <service
+            android:name=".service.PushService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".mvp.setting.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

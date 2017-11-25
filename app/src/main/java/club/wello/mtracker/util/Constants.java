@@ -1,4 +1,4 @@
-package club.wello.mtracker.apiUtil;
+package club.wello.mtracker.util;
 
 /**
  * for storing constants

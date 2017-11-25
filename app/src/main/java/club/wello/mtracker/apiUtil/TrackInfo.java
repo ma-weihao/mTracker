@@ -25,34 +25,41 @@ public class TrackInfo {
      * Success : true
      */
 
+
+    @Id
+    private String LogisticCode;
     @Property
     private String jsonString;
     @Property
     private Long createdTime;
     @Property
     private String title;
-
-    @Id
-    private String LogisticCode;
+    @Property
+    private boolean readable;
+    @Property
+    private boolean pushable;
     @Transient
     private String ShipperCode;
     @Property
     private String State;
+
     @Transient
     private String EBusinessID;
     @Transient
-    private String Reason;  //only exists when Success is false
+    private String Reason;  //only exists when 'Success' is false
     @Transient
     private boolean Success;
     @Transient
     private List<TracesBean> Traces;
 
-    @Generated(hash = 215756737)
-    public TrackInfo(String jsonString, Long createdTime, String title, String LogisticCode, String State) {
+    @Generated(hash = 1521716911)
+    public TrackInfo(String LogisticCode, String jsonString, Long createdTime, String title, boolean readable, boolean pushable, String State) {
+        this.LogisticCode = LogisticCode;
         this.jsonString = jsonString;
         this.createdTime = createdTime;
         this.title = title;
-        this.LogisticCode = LogisticCode;
+        this.readable = readable;
+        this.pushable = pushable;
         this.State = State;
     }
 
@@ -140,6 +147,30 @@ public class TrackInfo {
         this.title = title;
     }
 
+    public boolean getReadable() {
+        return this.readable;
+    }
+
+    public void setReadable(boolean readable) {
+        this.readable = readable;
+    }
+
+    public boolean getPushable() {
+        return this.pushable;
+    }
+
+    public void setPushable(boolean pushable) {
+        this.pushable = pushable;
+    }
+
+    public boolean isReadable() {
+        return readable;
+    }
+
+    public boolean isPushable() {
+        return pushable;
+    }
+
     public static class TracesBean {
         /**
          * AcceptStation : 到达：浙江乐清市乐成公司 已揽件
@@ -165,4 +196,5 @@ public class TrackInfo {
             this.AcceptTime = AcceptTime;
         }
     }
+
 }

@@ -53,8 +53,8 @@ public class VerticalLineDotView extends View {
         dotPaint.setStyle(Paint.Style.FILL);
 
         specialDotPaint = new Paint();
-        dotPaint.setColor(specialDotColor);
-        dotPaint.setStyle(Paint.Style.FILL);
+        specialDotPaint.setColor(specialDotColor);
+        specialDotPaint.setStyle(Paint.Style.FILL);
     }
 
     @Override

@@ -1,12 +1,15 @@
 package club.wello.mtracker.util;
 
-import java.util.Map;
+import android.util.Log;
 
 import club.wello.mtracker.apiUtil.KdApi;
+import club.wello.mtracker.apiUtil.KdniaoUtil;
 import club.wello.mtracker.apiUtil.TrackCompanyInfo;
 import club.wello.mtracker.apiUtil.TrackInfo;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.ObservableSource;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -40,15 +43,34 @@ public class HttpUtil {
                 .build();
     }
 
-    public static Observable<TrackInfo> getTrackInfo(Map<String, String> map) {
-        return getKdApi().getTrackInfo(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+    /**
+     *
+     * @param code 快递公司编号
+     * @param number 运单号
+     * @return observable
+     */
+    public static Observable<TrackInfo> getTrackInfo(String code, String number) {
+        return getKdApi().getTrackInfo(KdniaoUtil.getOrderTracesByJson(code, number))
+                .subscribeOn(Schedulers.io());
     }
 
-    public static Observable<TrackCompanyInfo> getTrackCompanyInfo(Map<String, String> map) {
-        return getKdApi().getTrackCompany(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+    public static Observable<TrackCompanyInfo> getTrackCompanyInfo(String number) {
+        return getKdApi().getTrackCompany(KdniaoUtil.getOrderTracesByJson(number))
+                .subscribeOn(Schedulers.io());
+    }
+
+    public static Observable<TrackInfo> getTrackInfoDirectly(final String number) {
+        return getTrackCompanyInfo(number)
+                .flatMap(new Function<TrackCompanyInfo, ObservableSource<TrackInfo>>() {
+                    @Override
+                    public ObservableSource<TrackInfo> apply(@NonNull TrackCompanyInfo trackCompanyInfo) throws Exception {
+                        if (trackCompanyInfo.isSuccess()) {
+                            return getTrackInfo(trackCompanyInfo.getShippers().get(0).getShipperCode(), number);
+                        } else {
+                            Log.e(TAG, "apply: no company found " + trackCompanyInfo.getReason());
+                            return null;
+                        }
+                    }
+                });
     }
 }
